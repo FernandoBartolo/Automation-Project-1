@@ -5,7 +5,7 @@ beforeEach(() => {
 
 // Assignement 4: add content to the following tests
 
-describe.only('Section 1: Functional tests', () => {
+describe('Section 1: Functional tests', () => {
 
 
     it('User can use only same both first and validation passwords', ()=>{
@@ -100,7 +100,7 @@ describe.only('Section 1: Functional tests', () => {
 /*
 Assignement 5: create more visual tests
 */
-describe('Section 2: Visual tests', () => {
+describe.only('Section 2: Visual tests', () => {
     it('Check that logo is correct and has correct size', () => {
         cy.log('Will check logo source and size')
         cy.get('img').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')

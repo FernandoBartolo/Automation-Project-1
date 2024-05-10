@@ -16,12 +16,14 @@ Assignment 2:
  5. Add comment to the first test containing today’s date
  */
 
-describe('This is first test suite', () => {
-    it('User can submit data only when valid mandatory values are added', () => {
-        cy.get('#username').type('Something')
-        cy.get('[data-testid="phoneNumberTestId"]').type('5656565656')
-        cy.get('input[name="password"]').type('Password123')
-        cy.get('[name="confirm"]').type('Password123')
+describe.only('This is first test suite, Fernando Bartolo', () => {
+    it.only('User can submit data only when valid mandatory values are added', () => {
+        cy.get('#username').type('FernBart')
+        cy.get('#firstName').type('Fernando')
+        cy.get('#lastName').type('Bartolo')
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('input[name="password"]').type('testpass123')
+        cy.get('[name="confirm"]').type('testpass123')
 
         //in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
@@ -96,25 +98,62 @@ describe('This is first test suite', () => {
     Assignment 3: add the content to the following tests
     */
 
-    it('User cannot submit data when phone number is absent', () => {
+    it.only('User cannot submit data when phone number is absent', () => {
         // Add test, similar to previous one with phone number field not filled in
         // All other fields should be entered correctly
         // Assert that submit button is not enabled and that successful message is not visible
+        cy.get('#username').type('FernBart')
+        cy.get('#firstName').type('Fernando')
+        cy.get('#lastName').type('Bartolo')
+        cy.get('[data-testid="phoneNumberTestId"]').type('12345677')
+        cy.get('input[name="password"]').type('testpass123')
+        cy.get('[name="confirm"]').type('testpass123')   
+
+          
+           // Assert that both input and password error messages are not shown
+           // next 2 lines check exactly the same, but using different approach
+           cy.get('#input_error_message').should('not.be.visible')
+           cy.get('#password_error_message').should('have.css', 'display', 'none')
+        
+        
     })
 
-    it('User cannot submit data when password and/or confirmation password is absent', () => {
+    it.only('User cannot submit data when password and/or confirmation password is absent', () => {
         // Add test, similar to previous one with password field not filled in
         // All other fields should be entered correctly
         // Assert that submit button is not enabled and that successful message is not visible
+        cy.get('#username').type('FernBart')
+        cy.get('#firstName').type('Fernando')
+        cy.get('#lastName').type('Bartolo')
+        cy.get('[data-testid="phoneNumberTestId"]').type('12345677')
+        cy.get('input[name="password"]').clear('testpass123')
+        cy.get('[name="confirm"]').clear('testpass123')   
+
+          
+           // Assert that both input and password error messages are not shown
+           // next 2 lines check exactly the same, but using different approach
+           cy.get('#input_error_message').should('not.be.visible')
+           cy.get('#password_error_message').should('have.css', 'display', 'none')
     })
 
-    it('User cannot add letters to phone number', () => {
+    it.only('User cannot add letters to phone number', () => {
         // Next verification is given as example
         // how we can check from html code, that phone number should contain only numbers
-        cy.get('[data-testid="phoneNumberTestId"]').should('have.attr', 'type', 'number')
-
         // Add steps, when all fields are correctly filled in, except phone number
         // Try typing letters to phone number field
         // Assert that submit button is not enabled and that successful message is not visible
+
+        cy.get('#username').type('FernBart')
+        cy.get('#firstName').type('Fernando')
+        cy.get('#lastName').type('Bartolo')
+        cy.get('[data-testid="phoneNumberTestId"]').type('fernando')
+        cy.get('input[name="password"]').type('testpass123')
+        cy.get('[name="confirm"]').type('testpass123')   
+
+          
+           // Assert that both input and password error messages are not shown
+           // next 2 lines check exactly the same, but using different approach
+           cy.get('#input_error_message').should('not.be.visible')
+           cy.get('#password_error_message').should('have.css', 'display', 'none')
     })
 })
